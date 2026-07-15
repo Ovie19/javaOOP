@@ -2,6 +2,8 @@ package dsa;
 
 public class Queue {
     private int count;
+    private int currentIndex;
+    private int lastPosition;
     private final String[] elements;
 
     public Queue(int size) {
@@ -10,7 +12,6 @@ public class Queue {
 
     public boolean add(String element) {
         if  (count == elements.length) throw new IllegalArgumentException("Queue is full");
-
         return addElement(element);
     }
 
@@ -30,29 +31,33 @@ public class Queue {
 
     public String element() {
         if (count == 0) throw new IllegalArgumentException("Queue is empty");
-        return elements[0];
+        return elements[currentIndex];
     }
 
     public String peek() {
-        return elements[0];
-    }
-
-    private void shiftValues() {
-        for (int index = 0; index < count; index++) {
-            elements[index] = elements[index + 1];
-        }
+        return elements[currentIndex];
     }
 
     private boolean addElement(String element) {
+        if (lastPosition == elements.length)
+            shiftValues();
+
+        lastPosition++;
         elements[count++] = element;
         return true;
     }
 
     private String removeElement() {
-        String element = elements[0];
+        String element = elements[currentIndex++];
         count--;
-
-        shiftValues();
         return element;
+    }
+
+    private void shiftValues() {
+        for (int index = 0; index < count; index++) {
+            elements[index] = elements[currentIndex + index];
+        }
+        lastPosition -= currentIndex;
+        currentIndex = 0;
     }
 }

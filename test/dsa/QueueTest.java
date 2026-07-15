@@ -114,6 +114,12 @@ public class QueueTest {
         assertEquals("Ghost", queue.poll());
         assertEquals("Tommy", queue.poll());
         assertEquals("Alicia", queue.poll());
+
+        queue.add("Shege1");
+        queue.add("Shege2");
+        queue.add("Shege3");
+        queue.add("Shege4");
+        queue.add("Shege5");
     }
 
     @Test
@@ -146,9 +152,6 @@ public class QueueTest {
         assertEquals("Ghost", queue.remove());
         assertEquals("Tommy", queue.remove());
     }
-
-//    @Test
-//    public void offerMoreElementsThanQueueSizeThrowsExceptionTest() {}
 
     @Test
     public void addX_element_retrieveXValueTest() {

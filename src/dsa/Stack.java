@@ -13,7 +13,7 @@ public class Stack {
     }
 
     public void push(String element) {
-        if  (isFull()) throw new IllegalArgumentException("Stack is full");
+        if (isFull()) throw new IllegalArgumentException("Stack is full");
         elements[count++] = element;
     }
 
